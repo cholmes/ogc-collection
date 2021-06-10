@@ -32,20 +32,6 @@ clients to get metadata for the file they're using directly, but it works just a
 It is designed to be easily ingested in to an OGC API - Records service, and a companion specification will show how to translate these
 core fields into GeoJSON, which is directly compatible with OGC API - Records.
 
-## IDEAS (WIP)
- * version / conformance alternative - link to a conformsTo object? Include an inline conformsTo? Link to a JSON Schema that
-   validates it? 
- * More requirements than in core? Like title, description, itemType
- * A simple extension of this with options for dynamic endpoints, like dynamic CRS options? (storageCrs and crs array)
-
-### TODOS
- * figure out formatting for language property
- * get more details about themes, formats, keywordsCodespace, rights & associations, and explain them better.
-   - Not sure if associations is the same link object as normal 'links'
- * Sort out STAC 'provider' array vs. contactPoint & publisher.
- * Not sure if 'data' is the right rel for the link to the actual file. Should investigate more. Might be that associations are the 
- better place to put the links to the actual data.
- * Add various examples, ideally with live data.
 
 ## Collection fields
 
