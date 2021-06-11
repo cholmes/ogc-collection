@@ -10,7 +10,6 @@
           "interval": [ [ "2010-02-15T12:34:56Z", null ] ]
         }
       },
-      "license": "CC0-1.0",
       "type": "feature",
       "links": [
         { "href": "http://data.example.org/collections/buildings/items",

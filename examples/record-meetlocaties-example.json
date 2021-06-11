@@ -1,6 +1,8 @@
 {
     "id": "de0b0f94-aadb-4db4-a1b5-9a656810682c",
     "type": "Feature",
+    "created": "2021-02-05",
+    "updated": "2021-02-21T00:14:33Z",
     "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -29,8 +31,6 @@
         ]
     },
     "properties": {
-        "record-created": "2021-02-05",
-        "record-updated": "2021-02-21T00:14:33Z",
         "created": "2018-02-05T08:15:56Z",
         "updated": "2021-02-21T00:14:33Z",
         "type": "dataset",
@@ -49,7 +49,7 @@
                 "type": "OGC:WFS"
             }
         ],
-        "externalId": "de0b0f94-aadb-4db4-a1b5-9a656810682c",
+        "externalId": "meetlocaties-waterschap-rivierenland",
         "themes": [
             {
                 "concepts": [
