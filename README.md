@@ -1,5 +1,7 @@
 # ogc-collection
-Experiment to make a 'Collection' building block that can be used as a static cloud file.
+Experiment to make two 'OGC Building Blocks'. One is the 'Collection', to be able to use that JSON to link to a static file, serving as its metadata. And 
+the other is the Records JSON, extracting just the core content out of OARec, that could be used statically, or could go straight into a WFS with no additional
+API capabilities.
 
 ## In this repo
 
