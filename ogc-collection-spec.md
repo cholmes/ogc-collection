@@ -2,8 +2,6 @@
 <!-- MarkdownTOC -->
 
 - [Overview](#overview)
-- [IDEAS \(WIP\)](#ideas-wip)
-  - [TODOS](#todos)
 - [Collection fields](#collection-fields)
   - [Additional Field Information](#additional-field-information)
     - [id](#id)
@@ -44,7 +42,6 @@ core fields into GeoJSON, which is directly compatible with OGC API - Records.
 | description     | string                                           | **REQUIRED.** Detailed multi-line description to fully explain the Collection. [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for rich text representation. |
 | keywords        | \[string]                                        | List of keywords describing the Collection.                  |
 | keywordsCodespace |  |A reference to a controlled vocabulary used for the keywords property. |
-| license         | string                                           | **REQUIRED.** Collection's license(s), either a SPDX [License identifier](https://spdx.org/licenses/), `various` if multiple licenses apply or `proprietary` for all other cases. |
 | providers       | \[[Provider Object](#provider-object)]           | A list of providers, which may include all organizations capturing or processing the data or the hosting provider. Providers should be listed in chronological order with the most recent provider being the last element of the list. |
 | extent          | [Extent Object](#extent-object)                  | **REQUIRED.** Spatial and temporal extents.                  |
 | links           | \[[Link Object](#link-object)]                   | **REQUIRED.** A list of references to other documents.       |
