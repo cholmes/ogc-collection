@@ -1,4 +1,3 @@
-
 {
     "id": "de0b0f94-aadb-4db4-a1b5-9a656810682c",
     "type": "Feature",
@@ -32,6 +31,8 @@
     "properties": {
         "record-created": "2021-02-05",
         "record-updated": "2021-02-21T00:14:33Z",
+        "created": "2018-02-05T08:15:56Z",
+        "updated": "2021-02-21T00:14:33Z",
         "type": "dataset",
         "title": "Meetlocaties waterkwantiteit Waterschap Rivierenland",
         "description": "Binnen het waterschap worden veel oppervlaktewaterpeilen en grondwaterstanden gemeten. De kaart toont waar metingen plaatsvinden en wat voor type meting plaats vindt. Voor meetgegevens of overige informatie over waterkwantiteit kunt u contact opnemen met het waterschap via h.niewold@wsrl.nl",

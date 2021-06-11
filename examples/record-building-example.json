@@ -1,0 +1,75 @@
+{
+    "id": "buildings",
+    "type": "Feature",
+    "geometry":
+    {
+        "type": "Polygon",
+        "coordinates":
+        [
+            [
+                [
+                    7.01,
+                    50.63
+                ],
+                [
+                    7.01,
+                    50.78
+                ],
+                [
+                    7.22,
+                    50.78
+                ],
+                [
+                    7.22,
+                    50.78
+                ],
+                [
+                    7.01,
+                    50.63
+                ]
+            ]
+        ]
+    },
+    "properties":
+    {
+        "record-created": "2020-03-01",
+        "record-updated": "2021-01-10T00:34:53Z",
+        "type": "feature",
+        "title": "Buildings",
+        "description": "Buildings in the city of Bonn.",
+        "extent":
+        {
+            "spatial":
+            {
+                "bbox":
+                [
+                    [
+                        7.01,
+                        50.63,
+                        7.22,
+                        50.78
+                    ]
+                ]
+            },
+            "temporal":
+            {
+                "interval":
+                [
+                    [
+                        "2010-02-15T12:34:56Z",
+                        null
+                    ]
+                ]
+            }
+        }
+    },
+    "links":
+    [
+        {
+            "rel": "alternate",
+            "type": "application/json",
+            "title": "This document as an OGC Collection",
+            "href": "./collection-building-example.json"
+        }
+    ]
+}
