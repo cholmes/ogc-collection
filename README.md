@@ -42,5 +42,46 @@ imiplementors should be able to find a document that clearly describes just the 
 
 ### STAC Items and Records
 
-TODO
+One question that has often come up is what is the relationship between STAC and OGC API Records? The two specs in this repo ideally help with an opinionated 
+answer to that question. It's been hard to really talk about it without the appropriate primitives in place. 
+
+The proposed primitives in the 'search geospatial data' space are:
+
+* A 'minimal Collection', as defined in OGC API - Features, which is 2 required fields (id and links), and a handful of optional ones (extent, title, description, etc)
+* A 'Collection', as the [OGC Collection Spec](ogc-collection-spec.md) in this repo attempts to articulate. This aims to provide enough information to enable
+ 'collection search'. 
+* An STAC Item, which is part of a Collection, that links to some type of geospatial information. A STAC Item is a GeoJSON feature,
+
+STAC provides both Collection and STAC Items, as well as an API to search STAC Items. In STAC there is a clear relationship, where each Item is a member of 
+a Collection. To make it concrete, 'Landsat 8' is a collection, while a particular landsat scene is an 'Item'. 
+
+The STAC API provides 'Item search', letting a user include one or more collections in a search (by area, time and/or properties), returning all STAC Items that match it.
+
+It does not have 'Collection search', that would let a user search for collections by area, time and/or properties. This would let them find 'NAIP' in the US, or
+an aerial imagery collection in the Netherlands, or a nice global dataset like Sentinel 2. The geometry of these is the area of the entire collection. THis is a 
+feature that many STAC users are asking for. 
+
+The STAC core team has been waiting for OARecords API to define that collection level search. But the needs are actually less than a fully defined new API. What
+STAC actually needs is mostly the [OGC Records GeoJSON spec](ogc-record-geojson-spec.md) - how to represent a 'Collection' as GeoJSON that can go either directly
+into the STAC Features API as a special layer, or is defined as a particular endpoint, but that works with the exact same Features API mechanics as STAC Item
+Search (cross collection) or individual collection/items endpoints in STAC's Featuers API's. STAC implementations could choose to use the sort extension, aligning
+STAC with OGC, and the Filter (CQL) extension.
+
+For those with deep OGC background, what we're proposing is that STAC API should serve the same role as the ebRIM CSW did in the past, enabling search of millions 
+of scenes/granules. And then Collection Search (Records API) should play the role as CSW iso19115 - primarily looking for 'layers', where you'd expect someone
+to fill out metadata. These can be imagery collections, but also vector information like 'building footprints' or 'roads'. These would ideally link to a Features 
+API. But the standalone [OGC Collection Spec](ogc-collection-spec.md) opens up the potential for 'static collections', where a Catalog crawls geopackages with
+Collection JSON sidecars, ingesting them and turning them into Record GeoJSON. And potentially even ingesting their source data into an OGC API - Features 
+implementation.
+
+Theoretically we could have some root 'Record' class that both STAC and Collection inherit from, with few required fields. But the value of that is unclear, 
+except to say a records API can fit anything. It seems cleaner to just let a features API have 'anything', and a records API is where you'd search iso19115 type
+things.
+
+One further question often posed is where n-dimensional data like netCDF and zarr fit in. For the most part those should be in the 'collection' level. It's made
+less sense to make them individual STAC Items when it's a big dataset with lots of information. But it depends on how the files are used. One could see a series
+of netCDF's that are all ocean temperatures with different time and space ranges, but that fit together into an overall 'collection', and in that case you'd want
+to use STAC Items to find the individual pieces. Similarly zarr can hold huge amounts of data, so you could have STAC Items that point into various pieces of it.
+It is more that with STAC you want to search for little 'parts' of the entire collection. But if you're representing the entire collection as one file then it
+likely makes less sense to put that in STAC.
 
