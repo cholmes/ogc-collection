@@ -85,3 +85,6 @@ to use STAC Items to find the individual pieces. Similarly zarr can hold huge am
 It is more that with STAC you want to search for little 'parts' of the entire collection. But if you're representing the entire collection as one file then it
 likely makes less sense to put that in STAC.
 
+So in conclusion, there is a space for both STAC and OARec. STAC should focus on Item level search: scenes/granules/point cloud captures/etc. OARec should focus
+on 'dataset' search. 
+
