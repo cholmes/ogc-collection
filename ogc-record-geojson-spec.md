@@ -71,7 +71,7 @@ resources below.
 | license | string | A legal document under which the resource is made available. |
 | rights | string |A statement that concerns all rights not addressed by the license such as a copyright statement. |
 | extent          | [Extent Object](#extent-object)                  | Spatial and temporal extents.                  |
-| associations | \[[Link Object] | A list of links for accessing the resource, links to other resources associated with this resource, etc. |
+| associations | \[[Link Object](#link-object)] | A list of links for accessing the resource, links to other resources associated with this resource, etc. |
 | crs             | string                                           | Coordinate reference system of the data represented by this collection.
 
 TODO: Explain these in more depth. I think some aren't strings, as per the examples.
