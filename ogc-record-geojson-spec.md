@@ -41,7 +41,6 @@ inherited from GeoJSON.
 | type       | string                                                                     | **REQUIRED.** Type of the GeoJSON Object. MUST be set to `Feature`. |
 | id         | string                                                                     | **REQUIRED.** A unique record identifier. |
 | geometry   | [GeoJSON Geometry Object](https://tools.ietf.org/html/rfc7946#section-3.1) \| [null](https://tools.ietf.org/html/rfc7946#section-3.2) | **REQUIRED.** Defines the full footprint of the asset represented by this item, formatted according to [RFC 7946, section 3.1](https://tools.ietf.org/html/rfc7946#section-3.1). The footprint should be the default GeoJSON geometry, though additional geometries can be included. Coordinates are specified in Longitude/Latitude or Longitude/Latitude/Elevation based on [WGS 84](http://www.opengis.net/def/crs/OGC/1.3/CRS84). |
-| bbox       | \[number]                                                                  |  Bounding Box of the asset represented by this Record, formatted according to [RFC 7946, section 5](https://tools.ietf.org/html/rfc7946#section-5). |
 | properties | [Properties Object](#properties-object)                                    | **REQUIRED.** A dictionary of additional metadata for the Item. |
 | links      | \[[Link Object](#link-object)]                                             | **REQUIRED.** List of link objects to resources and related URLs. A link with the `rel` set to `self` is strongly recommended. |
 | created         |  string                                          | The date-time this record was created, formatted to [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6).|
@@ -56,7 +55,7 @@ resources below.
 | Field Name | Type         | Description                                                  |
 | ---------- | ------------ | ------------------------------------------------------------ |
 | type            | string                                           | **REQUIRED** Denotes the resource type of the collection (e.g. feature, coverage, map, etc.).  |
-| title           | string                                           | A short descriptive human-readable one-line title for the Collection.       |
+| title           | string                                           | **REQUIRED** A short descriptive human-readable one-line title for the Collection.       |
 | description     | string                                           | Detailed multi-line description to fully explain the Collection. [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for rich text representation. |
 | keywords        | \[string]                                        | List of keywords describing the Collection.                  |
 | keywordsCodespace |  |A reference to a controlled vocabulary used for the keywords property. |
