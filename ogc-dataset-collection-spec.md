@@ -1,4 +1,4 @@
-# OGC Collection Specification <!-- omit in toc --> 
+# OGC Dataset Collection Specification <!-- omit in toc --> 
 <!-- MarkdownTOC -->
 
 - [Overview](#overview)
@@ -6,35 +6,53 @@
   - [Additional Field Information](#additional-field-information)
     - [id](#id)
     - [itemType](#itemtype)
+    - [crs](#crs)
   - [Extent Object](#extent-object)
     - [Spatial Extent Object](#spatial-extent-object)
     - [Temporal Extent Object](#temporal-extent-object)
   - [Provider Object](#provider-object)
   - [Link Object](#link-object)
     - [Relation types](#relation-types)
-- [Media Type for OGC Collections](#media-type-for-ogc-collections)
+- [Media Type for OGC Dataset Collections](#media-type-for-ogc-dataset-collections)
 
 <!-- /MarkdownTOC -->
 
 ## Overview
 
-*NOTE This is a work in progress, to flesh out how things might work*
+This document describes the fields needed for an OGC Collection to describe a 'dataset'. It defines how to use an OGC Collection as a 
+standalone JSON file that provides metadata for a single set of data. The data could be a geopackage, a geojson collection of features, 
+a zipped shapefile, a geotiff, a netcdf, a zarr file, or any number of standard data formats for storing geospatial information. It works
+especially well when combined with cloud-native geospatial formats like zarr, enabling clients to get metadata for the file they're using 
+directly, but it works just as well with formats that aren't as optimized for the cloud.
 
-This OGC Collection 'building block' describes the JSON fields that can be used to describe any OGC resource. It is typically used
-in an OGC API response, and its core specification is in OGC API, originally in the Features standard, but it is evolving to be part of 
-'Common'. Defining it as a 'building block' as pure JSON enables it to be re-used in other contexts.
+The OGC Dataset Collection JSON is the metadata needed to fully describe a dataset, such as a feature collection or a multi-dimensional coverage. 
+It is an [OGC Collection](ogc-collection-spec.md), and uses all the exact same fields, but makes
+more of the fields required and extends it with additional properties.
 
+The Dataset Collection can be mapped into an [OGC Dataset Record](ogc-dataset-record-spec.md), to represent it as GeoJSON (and available
+in a Features API or Records API)
 
 ## Collection fields
 
 | Element           | Type                            | Description                                                                                                                                                 |
 |-------------------|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| itemType          | string                          | **REQUIRED** Denotes the resource type of the collection (e.g. feature, coverage, map, etc.).                                                               |
-| id                | string                          | **REQUIRED.** Identifier for the Collection that is unique across the provider.                                                                             |
-| title             | string                          | A short descriptive human-readable one-line title for the Collection.                                                                                       |
-| description       | string                          | Detailed multi-line description to fully explain the Collection. [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for rich text representation. |
-| extent            | [Extent Object](#extent-object) | Spatial and temporal extents.                                                                                                                               |
-| links             | \[[Link Object](#link-object)]  | **REQUIRED.** A list of references to other documents.                                                                                                      |
+| itemType          | string                          | **REQUIRED** Denotes the resource type of the collection (e.g. feature, coverage, map, etc.).  |
+| crs               | string                          | Coordinate reference system of the data represented by this collection. |
+| id                | string                          | **REQUIRED.** Identifier for the Collection that is unique across the provider. |
+| title             | string                          | **REQUIRED.** A short descriptive human-readable one-line title for the Collection. |
+| description       | string                          | **REQUIRED.** Detailed multi-line description to fully explain the Collection. [CommonMark 0.29](http://commonmark.org/) syntax MAY be used for rich text representation. |
+| keywords          | \[string]                       | **REQUIRED.** List of keywords describing the  |
+| keywordsCodespace |                                 | A reference to a controlled vocabulary used for the keywords  |
+| publisher         | string                          | **REQUIRED.** The entity making the resource available                |
+| extent            | [Extent Object](#extent-object) | Spatial and temporal |
+| links             | \[[Link Object](#link-object)]  | **REQUIRED.** A list of references to other documents.  |
+| created           | string                          | The date-time this collection was created, formatted to [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6).   |
+| updated           | string                          | The date-time this collection was updated, formatted to [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6).   |
+| language          | string                          | The natural language used for textual values (i.e. titles, descriptions, etc) that the collection information is given in. |
+| themes            | string                          | A knowledge organization system used to classify the resource. |
+| formats           | \[string]                       | A list of available distributions for the resource. |
+| rights            | string                          | A statement that concerns all rights not addressed by the license such as a copyright statement. |
+| associations      | \[[Link Object]                 | A list of links for accessing the resource, links to other resources associated with this resource, etc. |
 
 
 ### Additional Field Information
@@ -50,6 +68,10 @@ it is a fairly unique name, or their name combined with the domain they operate 
 The type of the data. Current options are `feature`, `coverage` and `map`. 
 
 TODO: Explain what these are / when to use them. 
+
+#### crs
+
+ Coordinate reference system of the data represented by this collection. 
 
 ### Extent Object
 
@@ -168,9 +190,12 @@ The following table explains common `rel` types that are used for Collections.
 
 TODO: Add a more complete list of potential rel types.
 
-## Media Type for OGC Collections
+## Media Type for OGC Dataset Collections
 
-An OGC Collection is a JSON file ([RFC 8259](https://tools.ietf.org/html/rfc8259)), and thus should use the 
+An OGC Dataset Collection is a JSON file ([RFC 8259](https://tools.ietf.org/html/rfc8259)), and thus should use the 
 [`application/json`](https://tools.ietf.org/html/rfc8259#section-11) as the [Media Type](https://en.wikipedia.org/wiki/Media_type) 
 (previously known as the MIME Type). 
+
+
+
 

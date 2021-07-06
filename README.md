@@ -6,18 +6,42 @@ This repository provides two experimental specifications. This experiment has a 
 * Cleanly define core OGC content as JSON that is not tied to an API, so it can be used as a static resource on a cloud bucket that other API's can crawl & ingest.
 * Help provide clarity on how STAC fits in with OARecords.
 
-These points will be expanded on below. The repository contains two 'building block specifications. The first is the 'OGC Collection' which extracts the core JSON
+These points will be expanded on below. The repository contains four related 'building block specifications'. The first two are
+fairly pure 'extractions', in that they just pull our the key JSON fields from more extensive OGC API standard requirements, to make
+clear that they can be used as JSON responses or even standalone files on the cloud.
+
+The first is the 'OGC Collection' which extracts the core JSON
 content of a Collection from the OGC API, where it was originally specified as part of Feature, and is also in Common. STAC's 
 [Collection](https://github.com/radiantearth/stac-spec/blob/master/collection-spec/collection-spec.md) is also compatible, sharing most of the core fields.
 
-The second is the Records JSON, which just extracts the core content out of OARec (see [this link](https://github.com/opengeospatial/ogcapi-records/blob/master/core/standard/clause_7_core.adoc#response-5) and scroll down to table 8 - it doesn't seem to have a direct link), 
+The second is the 'OGC Record GeoJSON', which just extracts the core content out of OARec (see [this link](https://github.com/opengeospatial/ogcapi-records/blob/master/core/standard/clause_7_core.adoc#response-5) and scroll down to table 8 - it doesn't seem to have a direct link), 
 that could be used statically, or could go straight into a WFS with no additional API capabilities.
+
+These are both fairly 'thin', in that they have few required fields, and are meant to be flexible containers that most any OGC resource can
+fit into. 
+
+The more interesting pair of specs in this repository extend the first two specifications with more required fields, to be able to fully
+describe a 'dataset'. This has recently emerged as a key missing piece in the current OGC API ecosystem. It aims to describe a 'dataset'
+or a 'layer', the same level of abstraction as CSW ISO-19115, with information on the publisher, license, full title and descriptions, 
+keywords, etc.
+
+The first of the pair is the 'OGC Dataset Collection', which extends the OGC Collection with the key dataset fields. These are mostly
+extracted from the Record specification, but adapted to extend the OGC Collection (ie not trying to be GeoJSON).
+
+The second is the 'OGC Dataset Record GeoJSON', which extends the OGC Record GeoJSON with more required fields, and maps directly to the
+OGC Dataset Collection. 
+
+Both pairs of specs can be seen as direct mappings to one another. For each pair one is the JSON that fits with the OGC API Collection, 
+and one is the equivalent GeoJSON, which can be returned from an OGC API - Features or OGC API - Records.
 
 ## In this repo
 
- * [OGC Collection Spec](ogc-collection-spec.md) - first attempt at extracting the Collection JSON from OGC API to be a standalone file that 
- can be used statically.
- * [OGC Records GeoJSON spec](ogc-record-geojson-spec.md) - first attempt at pulling out the Record content model from OGC API - Records.
+ * [OGC Collection Spec](ogc-collection-spec.md) - Extraction of Collection JSON from OGC API to be a standalone file that 
+ can be used statically. Can represent any OGC API Resource.
+ * [OGC Record GeoJSON spec](ogc-record-geojson-spec.md) - Extraction the Record content model from OGC API - Records.
+ * [OGC Dataset Collection Spec](ogc-dataset-collection-spec.md) - Extraction of Collection JSON from OGC API to be a standalone file that 
+ can be used statically. Can represent any OGC API Resource.
+ * [OGC Dataset Record GeoJSON spec](ogc-dataset-record-spec.md) - Extraction the Record content model from OGC API - Records.
  * [Examples](examples/) - Matched examples showing both Record and Collection instantiations of the same data.
 
 ## More experiment information
@@ -47,10 +71,11 @@ answer to that question. It's been hard to really talk about it without the appr
 
 The proposed primitives in the 'search geospatial data' space are:
 
-* A 'minimal Collection', as defined in OGC API - Features, which is 2 required fields (id and links), and a handful of optional ones (extent, title, description, etc)
-* A 'Collection', as the [OGC Collection Spec](ogc-collection-spec.md) in this repo attempts to articulate. This aims to provide enough information to enable
+* A 'minimal Collection', as defined in OGC API - Features, which is 2 required fields (id and links), and a handful of optional ones (extent, title, description, etc), as articulated in the [OGC Collection Spec](ogc-collection-spec.md) in this repo.
+* A 'Dataset Collection', as the [OGC Dataset Collection Spec](ogc-dataset-collection-spec.md) in this repo describes. This aims to provide enough information to enable
  'collection search'. 
-* An STAC Item, which is part of a Collection, that links to some type of geospatial information. A STAC Item is a GeoJSON feature,
+* An STAC Item, which is part of a Collection, that links to some type of geospatial information. A STAC Item is a GeoJSON feature.
+
 
 STAC provides both Collection and STAC Items, as well as an API to search STAC Items. In STAC there is a clear relationship, where each Item is a member of 
 a Collection. To make it concrete, 'Landsat 8' is a collection, while a particular landsat scene is an 'Item'. 
@@ -62,7 +87,7 @@ an aerial imagery collection in the Netherlands, or a nice global dataset like S
 feature that many STAC users are asking for. 
 
 The STAC core team has been waiting for OARecords API to define that collection level search. But the needs are actually less than a fully defined new API. What
-STAC actually needs is mostly the [OGC Records GeoJSON spec](ogc-record-geojson-spec.md) - how to represent a 'Collection' as GeoJSON that can go either directly
+STAC actually needs is mostly the [OGC Records GeoJSON spec](ogc-dataset-record-spec.md) - how to represent a 'Collection' as GeoJSON that can go either directly
 into the STAC Features API as a special layer, or is defined as a particular endpoint, but that works with the exact same Features API mechanics as STAC Item
 Search (cross collection) or individual collection/items endpoints in STAC's Featuers API's. STAC implementations could choose to use the sort extension, aligning
 STAC with OGC, and the Filter (CQL) extension.
@@ -70,13 +95,9 @@ STAC with OGC, and the Filter (CQL) extension.
 For those with deep OGC background, what we're proposing is that STAC API should serve the same role as the ebRIM CSW did in the past, enabling search of millions 
 of scenes/granules. And then Collection Search (Records API) should play the role as CSW iso19115 - primarily looking for 'layers', where you'd expect someone
 to fill out metadata. These can be imagery collections, but also vector information like 'building footprints' or 'roads'. These would ideally link to a Features 
-API. But the standalone [OGC Collection Spec](ogc-collection-spec.md) opens up the potential for 'static collections', where a Catalog crawls geopackages with
+API. But the standalone [OGC Dataset Collection Spec](ogc-dataset-collection-spec.md) opens up the potential for 'static collections', where a Catalog crawls geopackages with
 Collection JSON sidecars, ingesting them and turning them into Record GeoJSON. And potentially even ingesting their source data into an OGC API - Features 
 implementation.
-
-Theoretically we could have some root 'Record' class that both STAC and Collection inherit from, with few required fields. But the value of that is unclear, 
-except to say a records API can fit anything. It seems cleaner to just let a features API have 'anything', and a records API is where you'd search iso19115 type
-things.
 
 One further question often posed is where n-dimensional data like netCDF and zarr fit in. For the most part those should be in the 'collection' level. It's made
 less sense to make them individual STAC Items when it's a big dataset with lots of information. But it depends on how the files are used. One could see a series
