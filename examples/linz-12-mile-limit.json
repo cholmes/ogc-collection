@@ -45,13 +45,13 @@
             "title": "Creative Commons Attribution 4.0 International"
         },
         {
-            "href": "./data/12-mile-territorial-sea-outer-limit.gpkg",
+            "href": "https://raw.githubusercontent.com/cholmes/ogc-collection/main/examples/data/12-mile-territorial-sea-outer-limit.gpkg",
             "rel": "enclosure",
             "type": "application/geopackage+sqlite3",
             "title": "Data as a Geopackage"
         },
         {
-            "href": "./data/12-mile-territorial-sea-outer-limit.xml",
+            "href": "https://raw.githubusercontent.com/cholmes/ogc-collection/main/examples/data/12-mile-territorial-sea-outer-limit.xml",
             "rel": "describedby",
             "type": "text/xml",
             "title": "ISO 19115/19139 Metadata"
