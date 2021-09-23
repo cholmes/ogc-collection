@@ -1,19 +1,18 @@
 {
     "id": "8de93723-46b5-a99e-183f-bb8448ce75e7",
     "title": "12 Mile Territorial Sea Outer Limit",
-    "description": "New Zealand Territorial Seas: The territorial sea is the belt of sea adjacent to the coast out to a distance of 12 nautical miles from prescribed baselines over which New Zealand, as the coastal state, has the same rights of sovereignty that it exercises over its land territory subject to the right of innocent passage (and transit passage through any straits used for international navigation) of ships of other states. 'Innocent passage' excludes fishing activities. Maritime Boundary Definitions: http://www.linz.govt.nz/hydro/nautical-info/maritime-boundaries/definitions#zones Further References: http://www.linz.govt.nz/hydro/nautical-info/maritime-boundaries",    "extent":
+    "description": "New Zealand Territorial Seas: The territorial sea is the belt of sea adjacent to the coast out to a distance of 12 nautical miles from prescribed baselines over which New Zealand, as the coastal state, has the same rights of sovereignty that it exercises over its land territory subject to the right of innocent passage (and transit passage through any straits used for international navigation) of ships of other states. 'Innocent passage' excludes fishing activities. Maritime Boundary Definitions: http://www.linz.govt.nz/hydro/nautical-info/maritime-boundaries/definitions#zones Further References: http://www.linz.govt.nz/hydro/nautical-info/maritime-boundaries",
+    "extent":
     {
         "spatial":
         {
             "bbox":
             [
                 [
-                    [
-                        -52.821368717,
-                        165.553371412,
-                        -29.030330272,
-                        -175.541422
-                    ]
+                    165.553371412,
+                    -52.821368717,
+                    -175.541422,
+                    -29.030330272
                 ]
             ]
         }
@@ -22,14 +21,15 @@
     "updated": "2011-07-26T00:00:00Z",
     "publisher": "LINZ - Land Information New Zealand",
     "language": "eng",
-    "type": "feature",
+    "itemType": "feature",
     "contactPoint": "LINZ - Land Information New Zealand, customersupport@linz.govt.nz",
     "associations":
     [
         {
             "href": "https://data.linz.govt.nz/services;key=YOUR_API_TOKEN/wfs/layer-50846?service=WFS&request=GetCapabilities",
-            "rel": "item",
-            "type": "OGC:WFS"
+            "rel": "service",
+            "type": "application/xml",
+            "title": "OGC Web Feature Service (Capabilities)"
         }
     ],
     "externalId": "8de93723-46b5-a99e-183f-bb8448ce75e7",
@@ -48,6 +48,7 @@
             "href": "https://raw.githubusercontent.com/cholmes/ogc-collection/main/examples/data/12-mile-territorial-sea-outer-limit.gpkg",
             "rel": "enclosure",
             "type": "application/geopackage+sqlite3",
+            "length": 1966080,
             "title": "Data as a Geopackage"
         },
         {
